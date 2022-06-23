@@ -10,13 +10,14 @@ public:
             
             
             while(map.size() > k) {
-                if(--map[s[start]] == 0) {
+                map[s[start]]--;
+                if(map[s[start]] == 0) {
                     map.erase(s[start]);
                 }
-
+                
                 start++;
             }
-            length = max(length, end - start +1);
+            length = max(length, end - start + 1);
         }
         
         return length;
