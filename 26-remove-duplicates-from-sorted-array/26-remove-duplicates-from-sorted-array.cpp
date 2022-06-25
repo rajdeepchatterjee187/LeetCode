@@ -9,9 +9,7 @@ public:
                 j++;
             }
             else{
-                int a = nums[i+1];
                 nums[i+1] = nums[j];
-                nums[j] = a;
                 j++;
                 i++;
             }
