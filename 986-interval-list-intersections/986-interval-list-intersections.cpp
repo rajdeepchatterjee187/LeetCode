@@ -6,12 +6,13 @@ public:
         int i = 0, j = 0;
         vector<int> interval(2);
         while(i<firstList.size() && j<secondList.size()) {
-            if((firstList[i][start] >= secondList[j][start] && firstList[i][start] <= secondList[j][end]) || (secondList[j][start] >= firstList[i][start] && secondList[j][start] <= firstList[i][end]))
-            {
-            interval[start] = max(firstList[i][start], secondList[j][start]);
-            interval[end] = min(firstList[i][end], secondList[j][end]);
-            result.push_back(interval);
+            
+            int low = max(firstList[i][start], secondList[j][start]);
+            int high = min(firstList[i][end], secondList[j][end]);
+            if(low <= high) {
+                result.push_back({low,high});
             }
+            
             
             if(firstList[i][end] < secondList[j][end])  i++;
             else    j++;
