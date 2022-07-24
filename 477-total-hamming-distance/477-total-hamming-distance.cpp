@@ -17,7 +17,7 @@ public:
         }
     }
 
-    for (auto&& k : cnt) {           // loop over every bit count
+    for (auto& k : cnt) {           // loop over every bit count
         ans += k * (n - k);
     }
 
