@@ -1,32 +1,39 @@
 class Solution {
 public:
     int numIslands(vector<vector<char>>& grid) {
-        int m = grid.size();
-        int n = grid[0].size();
-        
-        int result = 0;
-        
-        for (int i = 0; i < m; i++) {
-            for (int j = 0; j < n; j++) {
-                if (grid[i][j] == '1') {
-                    dfs(grid, i, j, m, n);
-                    result++;
-                }
+        int nr = grid.size();
+    if (!nr) return 0;
+    int nc = grid[0].size();
+
+    int num_islands = 0;
+    for (int r = 0; r < nr; ++r) {
+      for (int c = 0; c < nc; ++c) {
+        if (grid[r][c] == '1') {
+          ++num_islands;
+          grid[r][c] = '0'; // mark as visited
+          queue<pair<int, int>> neighbors;
+          neighbors.push({r, c});
+          while (!neighbors.empty()) {
+            auto rc = neighbors.front();
+            neighbors.pop();
+            int row = rc.first, col = rc.second;
+            if (row - 1 >= 0 && grid[row-1][col] == '1') {
+              neighbors.push({row-1, col}); grid[row-1][col] = '0';
             }
+            if (row + 1 < nr && grid[row+1][col] == '1') {
+              neighbors.push({row+1, col}); grid[row+1][col] = '0';
+            }
+            if (col - 1 >= 0 && grid[row][col-1] == '1') {
+              neighbors.push({row, col-1}); grid[row][col-1] = '0';
+            }
+            if (col + 1 < nc && grid[row][col+1] == '1') {
+              neighbors.push({row, col+1}); grid[row][col+1] = '0';
+            }
+          }
         }
-        
-        return result;
+      }
     }
-    
-    void dfs(vector<vector<char>>& grid, int i, int j, int m, int n) {
-        if (i < 0 || i >= m || j < 0 || j >= n || grid[i][j] == '0') {
-            return;
-        }
-        grid[i][j] = '0';
-        
-        dfs(grid, i - 1, j, m, n);
-        dfs(grid, i + 1, j, m, n);
-        dfs(grid, i, j - 1, m, n);
-        dfs(grid, i, j + 1, m, n);
+
+    return num_islands;
     }
 };
