@@ -48,8 +48,12 @@ public:
             else if(nums[mid] < target) 
                 left = mid+1;
             else {
-                rightidx = mid;
-                left = mid+1;
+                if(mid == nums.size()-1 or nums[mid+1] != target){
+                    rightidx = mid;
+                    return rightidx;
+                } 
+                else 
+                    left = mid+1;
             }
         }
         return rightidx;
